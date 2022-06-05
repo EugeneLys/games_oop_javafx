@@ -12,7 +12,7 @@ public class Win {
         return rsl;
     }
 
-    public static boolean monoHorizontal (int[][] board, int row) {
+    public static boolean monoHorizontal(int[][] board, int row) {
         boolean result = true;
         for (int i = 0; i < board.length; i++) {
             if (board[row][i] != 1) {
@@ -25,8 +25,8 @@ public class Win {
 
     public static boolean monoVertical(int[][] board, int column) {
         boolean result = true;
-        for (int[] ints : board) {
-            if (ints[column] != 1) {
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][column] != 1) {
                 result = false;
                 break;
             }
