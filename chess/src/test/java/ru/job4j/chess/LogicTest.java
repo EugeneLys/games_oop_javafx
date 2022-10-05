@@ -12,31 +12,35 @@ public class LogicTest {
 
     @Test
     public void whenNotFound()
-            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+            throws FigureNotFoundException {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C2));
         logic.add(new RookBlack(Cell.D2));
         FigureNotFoundException exception = Assertions.assertThrows(FigureNotFoundException.class,
                 () -> logic.move(Cell.C1, Cell.G5));
+        Assertions.assertEquals("There is no figure here", exception.getMessage());
     }
 
     @Test
     public void whenOccupied()
-            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+            throws OccupiedCellException {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
         logic.add(new RookBlack(Cell.D2));
         OccupiedCellException exception = Assertions.assertThrows(OccupiedCellException.class,
                 () -> logic.move(Cell.C1, Cell.G5));
+        Assertions.assertEquals("This movement is blocked by other figure(-s)",
+                exception.getMessage());
     }
 
     @Test
     public void whenImpossibleMove()
-            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+            throws ImpossibleMoveException {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
         logic.add(new RookBlack(Cell.D2));
         ImpossibleMoveException exception = Assertions.assertThrows(ImpossibleMoveException.class,
                 () -> logic.move(Cell.C1, Cell.G3));
+        Assertions.assertEquals("Could not way by diagonal from C1 to G3", exception.getMessage());
     }
 }

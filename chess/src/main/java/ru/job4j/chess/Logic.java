@@ -23,8 +23,8 @@ public final class Logic {
     private boolean free(Cell[] steps) throws OccupiedCellException {
         for (Figure figure : figures) {
             for (Cell step : steps) {
-                if (figure != null && figure.position() == step) {
-                    throw new OccupiedCellException();
+                if (figure != null && figure.position().equals(step)) {
+                    throw new OccupiedCellException("This movement is blocked by other figure(-s)");
                 }
             }
         }
@@ -43,6 +43,6 @@ public final class Logic {
                 return index;
             }
         }
-        throw new FigureNotFoundException();
+        throw new FigureNotFoundException("There is no figure here");
     }
 }
